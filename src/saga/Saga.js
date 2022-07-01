@@ -1,8 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
-  DASHBOARD_REQUEST_FAILED,
-  GET_DASHBOARD,
-  GET_DASHBOARD_REQUEST,
   LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -31,20 +28,11 @@ function* UserLogin(action) {
   }
 }
 
-function* Dashboard() {
-  console.log("Dashboard saga here");
-  try {
-    yield put ({ type: GET_DASHBOARD});
-  } catch (E) {
-    yield { type:DASHBOARD_REQUEST_FAILED, error:E.error}
-  }
-}
 
 
 function* NewUserSaga() {
   yield takeEvery(REGISTRATION_REQUEST, RegisterPage);
   yield takeEvery(LOGIN_REQUEST, UserLogin);
-  yield takeEvery(GET_DASHBOARD_REQUEST, Dashboard);
 }
 
 export default NewUserSaga;

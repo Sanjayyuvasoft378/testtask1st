@@ -20,12 +20,7 @@ const initialData = {
             userData: action.user
         }
 
-     case GET_DASHBOARD:
-        JSON.parse(localStorage.getItem('User_Info',(action.user)))
-        return {
-            ...state,
-            userData:action.user
-        }
+
          default:
             return state
     }

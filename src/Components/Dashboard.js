@@ -1,18 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Dashboard } from "../redux/action/Action";
+import React from "react";
 import Table from 'react-bootstrap/Table';
-export default function GetPost() {
-  // const posts = useSelector((state) => state.userData);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(Dashboard());
-  }, []);
-  }
+export default function Dashboard() {
+  const data = JSON.parse(localStorage.getItem("User_Info"))
   return (
     <div>
       <Table striped bordered hover className="table">
-      <button style={{backgroundColor:"green",padding:"7px"} } onClick={()=>navigater("/addpost")}>AddPost</button>
         <thead>
         <tr>
           <th>Name</th>
@@ -23,7 +15,7 @@ export default function GetPost() {
           <th>Action</th>
         </tr>
         </thead>
-        {posts?.map((item, index) => {
+        {data.map((item, index) => {
           return (
             <tbody>
             <tr key={index}>
@@ -32,9 +24,9 @@ export default function GetPost() {
               <td><p>{item.password}</p></td>
               <td><p>{item.phone}</p></td>
               <td><p>{item.userType}</p></td>
-             <td> <button style={{backgroundColor:"green",padding:"7px"}} onClick={()=>singlePost(item.id)}>View</button>&nbsp;
-              <button style={{backgroundColor:"yellow",padding:"7px"}} onClick={()=>navigater(`/update/${item.id}`)}>Edit</button> &nbsp;
-              <button style={{backgroundColor:"red",padding:"7px"}} onClick={()=> deletepost(item.id)}>delete</button>&nbsp;
+             <td>
+              <button style={{backgroundColor:"yellow",padding:"7px"}} >Edit</button> &nbsp;
+              <button style={{backgroundColor:"red",padding:"7px"}} >delete</button>&nbsp;
               </td>
             </tr>
             </tbody>

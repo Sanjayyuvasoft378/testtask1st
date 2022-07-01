@@ -1,5 +1,5 @@
 
-import { GET_DASHBOARD_REQUEST, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTRATION_REQUEST } from "./ActionType" 
+import {LOGIN_REQUEST, REGISTRATION_REQUEST } from "./ActionType" 
 export const RegistrationPage = (data) =>{
     console.log(" registration action has been called",data)
     return {
@@ -16,11 +16,5 @@ export const LoginPage = (data) =>{
     }
 }
 
-export const Dashboard = () => {
-    console.log("dashboard page reloaded");
-    return {
-        type : GET_DASHBOARD_REQUEST
-    }
-}
 
 
