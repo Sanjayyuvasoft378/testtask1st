@@ -9,9 +9,16 @@ export default function Login() {
   const { register, handleSubmit ,formState: { errors },} = useForm();
   const dispatch = useDispatch();
   const user = useSelector(state => state)
-  const onSubmit = (data) => {
-  dispatch(LoginPage(data));
-  };
+  const onSubmit = data => {
+    const get_data = JSON.parse(localStorage.getItem('User_Info')) 
+    const c = get_data.filter((item)=>item.email == data.email)
+    if (c.length>0){
+      dispatch(LoginPage(data))
+    }
+    else{
+        alert("please enter correct email and password")
+    }
+  }
   useEffect(() => {
       if (user?.Error && user.Error.length !== 0) {
         toast.error(`${user?.Error}`,
@@ -20,10 +27,12 @@ export default function Login() {
         if (user?.userData && user.userData.length !== 0 ) {
             toast.success(`${user?.userData?.message[0]}`,
                 { position: toast.POSITION.TOP_RIGHT })
-                window.location.href = "/dashboard";
+                
         }
    }
 }, [user])
+
+
   return (
     <div>
       <h1>Login Your Acount</h1>
@@ -51,4 +60,4 @@ export default function Login() {
   );
 
 
-}
+  } 

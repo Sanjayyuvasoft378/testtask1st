@@ -6,10 +6,18 @@ import { RegistrationPage } from "../redux/action/Action";
 export default function Registration() {
   const dispatch = useDispatch();
   const { register, handleSubmit,formState : { errors } } = useForm();
-  const onSubmit = (data) => {
-    dispatch(RegistrationPage(data))
-    console.log("object",data);
-  };
+
+  const onSubmit = data => {
+    const get_data = JSON.parse(localStorage.getItem('User_Info')) 
+    const c = get_data?.filter((item)=> item.email == data.email && item.password == data.password)
+    if (c?.length>0){
+      alert("This email is already exist")
+    }
+    else{
+      dispatch(RegistrationPage(data))
+    }
+  }
+  
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -36,7 +44,6 @@ export default function Registration() {
         <br />
         <input {...register("password", { required: "enter a password" })} />
         {errors.password && <p>Password  is required.</p>}
-
         <br /><br />
         <label htmlFor="">User Type</label>
         <br />
