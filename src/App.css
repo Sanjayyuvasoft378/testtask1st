@@ -38,7 +38,7 @@
 }
 table{
 
-  background-color: #051013;
+  background-color: #74d7f2;
   color: azure;
   justify-content: center;
   margin-top: 20px;
@@ -48,7 +48,7 @@ table{
 
 
 table td:hover{
-  background-color: #39494d;
+  background-color: #f1f4f5;
   border-radius: 25px;
   background-image: 'https://mdbcdn.b-cdn.net/img/new/fluid/city/111.webp';
 }

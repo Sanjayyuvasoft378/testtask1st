@@ -11,8 +11,8 @@ export default function Login() {
   const user = useSelector(state => state)
   const onSubmit = data => {
     const get_data = JSON.parse(localStorage.getItem('User_Info')) 
-    const c = get_data.filter((item)=>item.email == data.email)
-    if (c.length>0){
+    const c = get_data?.filter((item)=>item.email == data.email)
+    if (c?.length>0){
       dispatch(LoginPage(data))
     }
     else{

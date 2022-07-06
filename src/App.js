@@ -1,5 +1,5 @@
 import "./App.css";
-import Footer from "./Components/Footer";
+import SignUp from "./Components/newsignup";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
 import { Routes, Route, Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import Logout from "./Components/Logout";
 import AboutUs from "./Components/AboutUs";
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
+import Postupdate from "./Components/UpdateData";
 function App() {
   const user_token = localStorage.getItem("Token");
   // const user_token = "";
@@ -34,6 +35,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/header" element={<Header />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/update" element={<Postupdate />} />
             </Routes>
           </>
         ) : (
@@ -42,6 +44,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/about" element={<AboutUs />} />
+              <Route path="signup" element={<SignUp />} />
             </Routes>
           </>
         )}

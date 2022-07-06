@@ -1,9 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { v4 as uuid } from 'uuid';
 import { Link } from "react-router-dom";
 import { RegistrationPage } from "../redux/action/Action";
 export default function Registration() {
+  const unique_id = uuid();
+  const small_id = unique_id.slice(0,8)
   const dispatch = useDispatch();
   const { register, handleSubmit,formState : { errors } } = useForm();
 
@@ -14,6 +17,7 @@ export default function Registration() {
       alert("This email is already exist")
     }
     else{
+      data.id=small_id
       dispatch(RegistrationPage(data))
     }
   }
@@ -28,11 +32,12 @@ export default function Registration() {
         {errors.email && <p>Name  is required.</p>}
 
         <br /><br />
+        
         <label htmlFor="">Email</label>
         <br />
         <input {...register("email", { required: "enter email address" })} />
         {errors.email && <p>Email  is required.</p>}
-
+       
         <br /><br />
         <label htmlFor="">Phone</label>
         <br />

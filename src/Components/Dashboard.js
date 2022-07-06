@@ -1,21 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
 import 'react-pro-sidebar/dist/css/styles.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Modal,Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import Sidebar from "./Sidebar";
+import { useParams } from "react-router-dom";
+
 export default function Dashboard() {
-  const dispatch = useDispatch();
-  const data = JSON.parse(localStorage.getItem("User_Info"))
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [name, setfirstName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [phone, setNumber] = useState();
+  const [userType, setRole] = useState();
+  const {id} = useParams();
+  const data = JSON.parse(localStorage.getItem("User_Info"));
+ 
+  const Edit = (name, email, phone, userType,id ,index) => {
+    setShow(true)
+   console.log("editable data",index)
+    console.log("object",data);
+    setIsVisible(true);
+    setfirstName(name);
+    setEmail(email);
+    setPassword(password);
+    setNumber(phone);
+    setRole(userType);
 
-  // const DeleteData = data => {
-  //   const get_data = JSON.parse(localStorage.getItem('User_Info')) 
-  //   const c = get_data?.filter((item)=>item.email == data.email)
-  //   if (c.length>0){alert("This email is already exist")}
-  //   else{dispatch(RegistrationPage(data))}
-  // }
+  };
+  const handleDelete = (id) => {
+    console.log(32342, id)
+    const filterdata = data.filter((item, index) => index != id)
+    console.log(333, filterdata)
+    localStorage.setItem("User_Info", JSON.stringify(filterdata))
+    window.location.href = "/dashboard"
+  }
+  const updatePost = (name, email, password, phone, userType) => {
+    const data = JSON.parse(localStorage.getItem("User_Info"));
+    data.name= name;
+    data.email = email;
+    data.phone = phone;
+    data.password= password;
+    data.userType= userType;
+    const c= [data.map((item)=>{
+      if(item.email==email){
+        return data;
+      }else{
+        return item;
+      }
+    })];
+    localStorage.setItem('User_Info',JSON.stringify(c));
+  };
+
+  const closeModal = () => {
+    setIsVisible(true)
+  }
+
   return (
     <div>
+      {isVisible && (
+        <Modal
+        isVisible={isVisible}
+        closeModal={closeModal}
+        name={name}
+        email={email}
+        password={password}
+        phone={phone}
+        userType={userType}
+        updatePost={updatePost}
+
+        />
+      )}
      {/* <Sidebar /> */}
       <Table striped bordered hover align="center" cellPadding={'5px'} cellspacing={"40px"} className="table">
 <thead>
@@ -37,24 +96,41 @@ export default function Dashboard() {
           </th>
         </tr>
         </thead>
-        {data.map((item, index) => {
+        {data?.map((item, index) => {
           return (
             <tbody>
             <tr key={index}>
               <td><p>{item.name}</p></td>
               <td><p>{item.email}</p></td>
-              {/* <td><p>{item.password}</p></td> */}
               <td><p>{item.phone}</p></td>
               <td><p>{item.userType}</p></td>
              <td>
-              <button style={{backgroundColor:"yellow",padding:"7px"}} >Edit</button> &nbsp;
-              <button style={{backgroundColor:"red",padding:"7px"}} >delete</button>&nbsp;
+              <button onClick = {()=> Edit(item.name,item.email,item.phone,item.userType, item.id,index) }  style={{backgroundColor:"yellow",padding:"7px"}} >Edit</button> &nbsp;
+              <button onClick={()=> handleDelete(index)} style={{backgroundColor:"red",padding:"7px"}} >delete</button>&nbsp;
               </td>
             </tr>
             </tbody>
           );
         })}
       </Table>
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

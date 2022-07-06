@@ -27,9 +27,6 @@ function* UserLogin(action) {
     yield { type: LOGIN_FAILED, error: E.messsage };
   }
 }
-
-
-
 function* NewUserSaga() {
   yield takeEvery(REGISTRATION_REQUEST, RegisterPage);
   yield takeEvery(LOGIN_REQUEST, UserLogin);
