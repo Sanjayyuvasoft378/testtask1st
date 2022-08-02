@@ -27,3 +27,67 @@ Let me know if you have any query
         }
    }
 }, [user])
+
+
+
+
+<Modal show={show} onHide={handleClose} style={customStyles}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Your Profile Here</Modal.Title>
+        </Modal.Header>
+        {/* <Modal.Bdy>Woohoo, you're reading this text in a modal!</Modal.Body> */}
+        <label>First Name</label>
+        <input
+          type="text"
+          placeholder="firstName"
+          value={name}
+          onChange={handleChange1}
+        />
+        <br />
+        <label>Email</label>
+
+        <input
+          type="number"
+          placeholder="Enter Number"
+          value={email}
+          onChange={handleChange2}
+        />
+        <br />
+        <label>Phone Number</label>
+
+        <input
+          type="role"
+          placeholder="Enter Role"
+          value={phone}
+          onChange={handleChange3}
+        />
+        <br />
+        <label>User Role</label>
+
+        <input
+          type="role"
+          placeholder="Enter Role"
+          value={userType}
+          onChange={handleChange4}
+        />
+        <br />
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      // onClick={() =>
+                    //   Edit(
+                    //     item.name,
+                    //     item.email,
+                    //     item.phone,
+                    //     item.userType,
+                    //     item.id,
+                    //     index
+                    //   )
+                    // }

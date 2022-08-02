@@ -7,7 +7,7 @@ import { RegistrationPage } from "../redux/action/Action";
 export default function Registration() {
   const unique_id = uuid();
   const small_id = unique_id.slice(0,8)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();        
   const { register, handleSubmit,formState : { errors } } = useForm();
 
   const onSubmit = data => {
